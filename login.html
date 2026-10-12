@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Analytics Engine | Login
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body class="login-page">
+
+
+    <div class="login-container">
+
+
+        <div class="login-brand">
+
+            <div class="login-logo">
+                N
+            </div>
+
+            <h1>
+                NEWS & SOCIAL
+            </h1>
+
+            <h1>
+                ANALYTICS ENGINE
+            </h1>
+
+            <p>
+                DSA INTELLIGENCE PLATFORM
+            </p>
+
+        </div>
+
+
+        <div class="login-card">
+
+            <div class="login-header">
+
+                <h2>
+                    Welcome back
+                </h2>
+
+                <p>
+                    Sign in to access the analytics dashboard
+                </p>
+
+            </div>
+
+
+            <form
+                onsubmit="login(event)"
+            >
+
+                <label>
+                    ADMIN EMAIL
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="admin@analytics.com"
+                    required
+                >
+
+
+                <label>
+                    PASSWORD
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+
+                <div
+                    id="loginError"
+                    class="login-error"
+                ></div>
+
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    LOGIN
+                </button>
+
+            </form>
+
+
+            <div class="login-footer">
+
+                <span class="status-dot"></span>
+
+                Analytics system online
+
+            </div>
+
+        </div>
+
+
+        <div class="login-bottom">
+
+            Content Intelligence • Moderation • DSA Analytics
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function login(event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value.trim();
+
+
+            const password =
+                document.getElementById(
+                    "password"
+                ).value;
+
+
+            /*
+             * Demo credentials
+             */
+
+            if (
+                email === "admin@analytics.com"
+                &&
+                password === "admin123"
+            ) {
+
+                window.location.href =
+                    "/dashboard";
+
+            }
+            else {
+
+                document.getElementById(
+                    "loginError"
+                ).textContent =
+                    "Invalid email or password.";
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

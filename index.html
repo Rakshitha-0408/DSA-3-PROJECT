@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <script>
+        const navigation = performance.getEntriesByType("navigation")[0];
+
+        if (navigation && navigation.type === "reload") {
+            window.location.replace("/");
+        }
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>News & Social Media Analytics Engine</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-title">NEWS & SOCIAL</div>
+            <div class="brand-title">ANALYTICS ENGINE</div>
+
+            <div class="brand-subtitle">
+                DSA INTELLIGENCE PLATFORM
+            </div>
+        </div>
+
+
+        <nav class="navigation">
+
+            <button class="nav-item active"
+                onclick="showPage('overview', this)">
+                <span>⌂</span>
+                Overview
+            </button>
+
+            <button class="nav-item"
+                onclick="showPage('feed', this)">
+                <span>◉</span>
+                Live Feed
+            </button>
+
+            <button class="nav-item"
+                onclick="showPage('search', this)">
+                <span>⌕</span>
+                Search
+            </button>
+
+            <button class="nav-item"
+                onclick="showPage('duplicates', this)">
+                <span>◈</span>
+                Duplicate Detection
+            </button>
+
+            <button class="nav-item"
+                onclick="showPage('ranking', this)">
+                <span>↕</span>
+                Priority Ranking
+            </button>
+
+            <button class="nav-item"
+                onclick="showPage('clusters', this)">
+                <span>◎</span>
+                Story Clusters
+            </button>
+
+            <button class="nav-item"
+                onclick="showPage('moderation', this)">
+                <span>✓</span>
+                Moderation
+            </button>
+
+            <button class="nav-item"
+                onclick="showPage('relationships', this)">
+                <span>⌘</span>
+                Relationships
+            </button>
+
+        </nav>
+
+
+        <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            <div>
+                <strong>SYSTEM ONLINE</strong>
+
+                <small>
+                    Java DSA engine ready
+                </small>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1 id="page-title">
+                    Overview
+                </h1>
+
+                <p id="page-subtitle">
+                    Monitor content, priorities, duplicates and moderation activity
+                </p>
+
+            </div>
+
+            <div class="admin">
+                ADMIN
+            </div>
+
+        </header>
+
+
+        <!-- ================= OVERVIEW ================= -->
+
+        <section id="overview" class="page active-page">
+
+            <div class="page-content">
+
+                <div class="stats-grid">
+
+                    <div class="stat-card blue">
+
+                        <span>TOTAL POSTS</span>
+
+                        <strong id="totalPosts">
+                            10
+                        </strong>
+
+                        <small>
+                            Content in dataset
+                        </small>
+
+                    </div>
+
+
+                    <div class="stat-card purple">
+
+                        <span>TOPICS</span>
+
+                        <strong id="totalTopics">
+                            5
+                        </strong>
+
+                        <small>
+                            Active story categories
+                        </small>
+
+                    </div>
+
+
+                    <div class="stat-card orange">
+
+                        <span>DUPLICATES</span>
+
+                        <strong id="totalDuplicates">
+                            1
+                        </strong>
+
+                        <small>
+                            Repeated content detected
+                        </small>
+
+                    </div>
+
+
+                    <div class="stat-card green">
+
+                        <span>MODERATION</span>
+
+                        <strong id="moderationCount">
+                            10
+                        </strong>
+
+                        <small>
+                            Posts waiting for review
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-grid">
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h2>
+                                    PRIORITY STORIES
+                                </h2>
+
+                                <p>
+                                    Highest priority content
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div id="priorityPreview"></div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h2>
+                                    TOPIC ACTIVITY
+                                </h2>
+
+                                <p>
+                                    Content distribution by topic
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div id="topicPreview"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= LIVE FEED ================= -->
+
+        <section id="feed" class="page">
+
+            <div class="page-content">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            CONTENT FEED
+                        </h2>
+
+                        <p>
+                            All ingested news and social media posts
+                        </p>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>ID</th>
+                                    <th>TITLE</th>
+                                    <th>TOPIC</th>
+                                    <th>SOURCE</th>
+                                    <th>PRIORITY</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="feedTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SEARCH ================= -->
+
+        <section id="search" class="page">
+
+            <div class="page-content">
+
+               <div class="search-box">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search news, content or topics..."
+    >
+
+    <button onclick="searchPosts()">
+        SEARCH
+    </button>
+
+    <button
+        class="clear-button"
+        onclick="clearSearch()">
+        ↻ CLEAR
+    </button>
+
+</div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            SEARCH RESULTS
+                        </h2>
+
+                        <p>
+                            Hash-based search across indexed content
+                        </p>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>ID</th>
+                                    <th>TITLE</th>
+                                    <th>TOPIC</th>
+                                    <th>SOURCE</th>
+                                    <th>PRIORITY</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="searchTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= DUPLICATES ================= -->
+
+        <section id="duplicates" class="page">
+
+            <div class="page-content">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            HASH-BASED DUPLICATE DETECTION
+                        </h2>
+
+                        <p>
+                            Repeated content identified using a Hash Table
+                        </p>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>ORIGINAL</th>
+                                    <th>DUPLICATE</th>
+                                    <th>TITLE</th>
+                                    <th>STATUS</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="duplicateTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RANKING ================= -->
+
+        <section id="ranking" class="page">
+
+            <div class="page-content">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            MAX HEAP PRIORITY RANKING
+                        </h2>
+
+                        <p>
+                            Higher priority posts are processed first
+                        </p>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>RANK</th>
+                                    <th>POST ID</th>
+                                    <th>TITLE</th>
+                                    <th>TOPIC</th>
+                                    <th>SOURCE</th>
+                                    <th>PRIORITY</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="rankingTable"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CLUSTERS ================= -->
+
+        <section id="clusters" class="page">
+
+            <div class="page-content">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            RELATED STORY CLUSTERS
+                        </h2>
+
+                        <p>
+                            Posts organized according to common topics
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        id="clusterContainer"
+                        class="cluster-container">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= MODERATION ================= -->
+
+        <section id="moderation" class="page">
+
+            <div class="page-content">
+
+                <div class="two-column">
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <h2>
+                                MODERATOR ASSIGNMENT
+                            </h2>
+
+                            <p>
+                                Round-robin distribution of posts
+                            </p>
+
+                        </div>
+
+
+                        <div class="table-container">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+                                        <th>POST</th>
+                                        <th>MODERATOR</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="moderatorTable"></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <h2>
+                                MODERATION QUEUE
+                            </h2>
+
+                            <p>
+                                FIFO: first submitted, first reviewed
+                            </p>
+
+                        </div>
+
+
+                        <div class="table-container">
+
+                            <table>
+
+                                <thead>
+
+                                    <tr>
+                                        <th>POSITION</th>
+                                        <th>POST</th>
+                                        <th>PRIORITY</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="queueTable"></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RELATIONSHIPS ================= -->
+
+        <!-- ================= RELATIONSHIPS ================= -->
+
+<section id="relationships" class="page">
+
+    <div class="page-content">
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <h2>
+                    CONTENT RELATIONSHIP MAP
+                </h2>
+
+                <p>
+                    Topics connected with related news and social posts
+                </p>
+
+            </div>
+
+            <div
+                id="relationshipMap"
+                class="relationship-map">
+            </div>
+
+            <div class="graph-info">
+
+                <span class="graph-dot topic-dot"></span>
+
+                <strong>Topic Node</strong>
+
+                <span class="graph-line"></span>
+
+                <span class="graph-dot post-dot"></span>
+
+                <strong>Post Node</strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
